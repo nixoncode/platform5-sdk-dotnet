@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Platform5.Sdk;
 
 public class Platform5
@@ -49,7 +51,7 @@ public class Platform5
 
         if (!response.IsSuccessStatusCode)
         {
-            var envelope = System.Text.Json.JsonSerializer.Deserialize<ApiResponse<T>>(bodyText, Json.Options);
+            var envelope = System.Text.Json.JsonSerializer.Deserialize<ApiResponse<JsonElement>>(bodyText, Json.Options);
             throw ToError((int)response.StatusCode, response.Headers, envelope, requestId);
         }
 

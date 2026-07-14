@@ -112,7 +112,8 @@ public class MockHttpMessageHandler : HttpMessageHandler
         if (_remaining.HasValue) response.Headers.Add("X-RateLimit-Remaining", _remaining.Value.ToString());
 
         var envelope = new { success = (int)_status < 400, message = "", data = _data, errors = _errors };
-        response.Content = new StringContent(JsonSerializer.Serialize(envelope), System.Text.Encoding.UTF8, "application/json");
+        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
+        response.Content = new StringContent(JsonSerializer.Serialize(envelope, options), System.Text.Encoding.UTF8, "application/json");
 
         return Task.FromResult(response);
     }
