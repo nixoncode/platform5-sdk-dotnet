@@ -37,7 +37,11 @@ public class Platform5
             request.Headers.Add("Idempotency-Key", idempotencyKey);
 
         if (body != null)
-            request.Content = JsonContent.Create(body);
+            request.Content = new StringContent(
+                System.Text.Json.JsonSerializer.Serialize(body, Json.Options),
+                System.Text.Encoding.UTF8,
+                "application/json"
+            );
 
         var response = await _http.SendAsync(request);
         var bodyText = await response.Content.ReadAsStringAsync();
