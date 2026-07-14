@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>Platform5.Sdk</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>nixoncode</Authors>
+    <Description>.NET SDK for the Platform5 Developer API — send SMS, email, and more</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/nixoncode/platform5-sdk-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nixoncode/platform5-sdk-dotnet.git</RepositoryUrl>
+    <PackageTags>platform5; sms; email; api; sdk</PackageTags>
+  </PropertyGroup>
+</Project>

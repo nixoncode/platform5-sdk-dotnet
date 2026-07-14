@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0"
+      - run: dotnet restore
+      - run: dotnet build --no-restore
+      - run: dotnet test --no-build --verbosity normal
+      - run: dotnet pack Platform5.Sdk --configuration Release
+      - uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true
+      - run: dotnet nuget push Platform5.Sdk/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_TOKEN }} --source https://api.nuget.org/v3/index.json

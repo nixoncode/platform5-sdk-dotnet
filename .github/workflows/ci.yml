@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: ["8.0", "9.0"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - run: dotnet restore
+      - run: dotnet build --no-restore
+      - run: dotnet test --no-build --verbosity normal
