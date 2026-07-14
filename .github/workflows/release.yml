@@ -15,9 +15,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0"
-      - run: dotnet restore
-      - run: dotnet build --no-restore
-      - run: dotnet test --no-build --verbosity normal
+      - run: dotnet restore Platform5.Sdk
+      - run: dotnet build Platform5.Sdk --no-restore
+      - run: dotnet test Platform5.Sdk.Tests --no-restore --verbosity normal
       - run: dotnet pack Platform5.Sdk --configuration Release
       - uses: softprops/action-gh-release@v3
         with:
