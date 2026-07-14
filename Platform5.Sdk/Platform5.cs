@@ -59,7 +59,7 @@ public class Platform5
         return result is not null ? result.Data : default;
     }
 
-    private static Platform5Exception ToError(int statusCode, System.Net.Http.Headers.HttpResponseHeaders headers, ApiResponse<object>? envelope, string? requestId)
+    private static Platform5Exception ToError<T>(int statusCode, System.Net.Http.Headers.HttpResponseHeaders headers, ApiResponse<T>? envelope, string? requestId)
     {
         var message = envelope?.Message ?? "Unknown error";
         var errors = envelope?.Errors;
